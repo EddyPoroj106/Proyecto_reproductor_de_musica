@@ -36,4 +36,17 @@ class lista_de_reproduccion:
         
         self.tamano += 1
     
+    def siguiente_cancion(self):
+        if not self.esta_vacia():
+            self.actual = self.actual.siguiente
+            return self.actual
+        return None
     
+    def cancion_anterior(self):
+        if not self.esta_vacia():
+            self.actual = self.actual.anterior
+            return self.actual
+        return None
+    
+    def obtener_cancion_actual(self):
+        return self.actual
