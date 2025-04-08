@@ -130,6 +130,31 @@ class ReproductorMusica:
         
         btn_siguiente = ttk.Button(btn_frame, text="⏭", width=3, command=self.siguiente_cancion)
         btn_siguiente.grid(row=0, column=4, padx=5)
+
+    def agregar_cancion(self):
+        archivos = filedialog.askopenfilenames(
+            title="Seleccionar canciones",
+            filetypes=(("Archivos MP3", "*.mp3"), ("Todos los archivos", "*.*")))
+        
+        for archivo in archivos:
+            nombre = os.path.basename(archivo).split('.')[0]
+            artista = "Desconocido"
+            duracion = "0:00"
+            
+            self.lista_reproduccion.agregar_cancion(nombre, artista, duracion, archivo)
+            self.lista_canciones.insert('', 'end', text=nombre, values=(artista, duracion))
+    
+    def reproducir(self):
+        if not self.lista_reproduccion.esta_vacia():
+            cancion_actual = self.lista_reproduccion.obtener_cancion_actual()
+            mixer.music.load(cancion_actual.ruta)
+            mixer.music.play()
+    
+    def pausar(self):
+        if mixer.music.get_busy():
+            mixer.music.pause()
+        else:
+            mixer.music.unpause()
     
     
 
