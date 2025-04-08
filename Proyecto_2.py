@@ -156,5 +156,21 @@ class ReproductorMusica:
         else:
             mixer.music.unpause()
     
+    def siguiente_cancion(self):
+        if not self.lista_reproduccion.esta_vacia():
+            self.lista_reproduccion.siguiente_cancion()
+            self.reproducir()
     
+    def cancion_anterior(self):
+        if not self.lista_reproduccion.esta_vacia():
+            self.lista_reproduccion.cancion_anterior()
+            self.reproducir()
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ReproductorMusica(root)
+    root.mainloop()
+
+
 
